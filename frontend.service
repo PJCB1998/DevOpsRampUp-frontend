@@ -1,0 +1,13 @@
+[Unit]
+Description=Auth API Service
+After=network.target
+
+[Service]
+Type=simple
+User=root
+Group=root
+WorkingDirectory=/app/frontend
+ExecStart=/bin/bash /app/frontend/frontend-launcher.sh
+
+[Install]
+WantedBy=multi-user.target
