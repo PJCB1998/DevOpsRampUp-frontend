@@ -33,11 +33,13 @@ jobs:
             username: ${{ secrets.EC2_USERNAME }}
             key: ${{ secrets.EC2_PRIVATE_KEY }}
             script: |
-                sudo docker kill $(docker ps -q)
-                sudo docker rm $(docker ps -a -q)
-                sudo docker rmi $(docker images -a -q) -f
-                sudo docker pull ${{ secrets.DOCKER_USERNAME }}/devops-ramp-up-frontend:latest
-                sudo docker run -d --name frontend -p 8080:8080 \
+                sudo usermod -aG docker $USER
+                newgrp docker
+                docker kill $(docker ps -q)
+                docker rm $(docker ps -a -q)
+                docker rmi $(docker images -a -q) -f
+                docker pull ${{ secrets.DOCKER_USERNAME }}/devops-ramp-up-frontend:latest
+                docker run -d --name frontend -p 8080:8080 \
                     -e PORT=8080 \
                     -e AUTH_API_ADDRESS=http://${{ secrets.ALB_DNS }}:8000 \
                     -e TODOS_API_ADDRESS=http://${{ secrets.ALB_DNS }}:8082 \
