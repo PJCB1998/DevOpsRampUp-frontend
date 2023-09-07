@@ -29,11 +29,10 @@ jobs:
       - name: Deploy to EC2 instance
         uses: appleboy/ssh-action@master
         with:
-            host: ${{ secrets.BASTION_HOST }}
-            username: ${{ secrets.BASTION_USERNAME }}
+            host: ${{ secrets.EC2_HOST }}
+            username: ${{ secrets.EC2_USERNAME }}
             key: ${{ secrets.EC2_PRIVATE_KEY }}
             script: |
-                ssh -i SSH_PRIVATE_KEY ${{ secrets.FRONTEND_USERNAME }}@${{ secrets.FRONTEND_HOST }} " \
                 sudo docker kill $(docker ps -q)
                 sudo docker rm $(docker ps -a -q)
                 sudo docker rmi $(docker images -a -q) -f
@@ -43,6 +42,6 @@ jobs:
                     -e AUTH_API_ADDRESS=http://${{ secrets.ALB_DNS }}:8000 \
                     -e TODOS_API_ADDRESS=http://${{ secrets.ALB_DNS }}:8082 \
                     -e ZIPKIN_URL=http://${{ secrets.ZIPKIN_IP }}:9411/api/v2/spans \
-                    ${{ secrets.DOCKER_USERNAME }}/devops-ramp-up-frontend:latest"
+                    ${{ secrets.DOCKER_USERNAME }}/devops-ramp-up-frontend:latest
             envs: 
             SSH_PRIVATE_KEY: ${{ secrets.EC2_PRIVATE_KEY }}
