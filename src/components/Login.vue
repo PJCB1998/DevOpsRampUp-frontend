@@ -7,7 +7,7 @@
                 <div class='row'>
                     <div class='col-md-3'></div>
                     <div class='col-md-6'>
-                        <h2>Please Login</h2>
+                        <h2>Please Login With CI/DI</h2>
                         <hr>
                     </div>
                 </div>
@@ -15,7 +15,7 @@
                     <div class='col-md-3'></div>
                     <div class='col-md-6'>
                         <div class='form-group has-danger'>
-                            <label class='sr-only' for='username'>Login CI/CD</label>
+                            <label class='sr-only' for='username'>Login</label>
                             <div class='input-group mb-2 mr-sm-2 mb-sm-0'>
                                 <div class='input-group-addon' style='width: 2.6rem'><i class='fa fa-at'></i></div>
                                 <input
