@@ -1,4 +1,4 @@
-name: Docker CI/CD Pipeline
+name: Unit Test Testing
 
 on:
   pull_request:
@@ -6,7 +6,7 @@ on:
 
 
 jobs: 
-    unit-test:
+    Checkout-And-Build-Imagw:
         runs-on: self-hosted
 
         steps: 
@@ -26,6 +26,10 @@ jobs:
                 push: true
                 tags: ${{ secrets.DOCKER_USERNAME }}/devops-ramp-up-frontend:testing-${{ github.sha }}
 
+    Run-Test:
+        runs-on: self-hosted
+
+        steps:
             - name: Run unit tests in Docker container
               run: |
                     docker pull ${{ secrets.DOCKER_USERNAME }}/devops-ramp-up-frontend:testing-${{ github.sha }}
