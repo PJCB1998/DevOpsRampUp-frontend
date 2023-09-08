@@ -18,6 +18,6 @@ RUN npm run build
 
 EXPOSE 8080
 
-ENTRYPOINT ["npm"] 
+ENTRYPOINT npm 
 
 CMD ["start"]
