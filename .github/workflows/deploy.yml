@@ -38,10 +38,10 @@ jobs:
                 docker kill $(docker ps -q)
                 docker rm $(docker ps -a -q)
                 docker rmi $(docker images -a -q) -f
-                docker pull ${{ secrets.DOCKER_USERNAME }}/devops-ramp-up-frontend:latest
+                docker pull ${{ secrets.DOCKER_USERNAME }}/devops-ramp-up-frontend:${{ github.sha }}
                 docker run -d --name frontend -p 8080:8080 \
                     -e PORT=8080 \
                     -e AUTH_API_ADDRESS=http://${{ secrets.ALB_DNS }}:8000 \
                     -e TODOS_API_ADDRESS=http://${{ secrets.ALB_DNS }}:8082 \
                     -e ZIPKIN_URL=http://${{ secrets.ZIPKIN_IP }}:9411/api/v2/spans \
-                    ${{ secrets.DOCKER_USERNAME }}/devops-ramp-up-frontend:latest
+                    ${{ secrets.DOCKER_USERNAME }}/devops-ramp-up-frontend:${{ github.sha }}
