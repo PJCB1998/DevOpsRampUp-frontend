@@ -9,8 +9,7 @@
     "start": "node build/dev-server.js",
     "build": "node build/build.js",
     "lint": "eslint --ext .js,.vue src",
-    "test": "node test/unit.test.js"
-
+    "test": "jest"
   },
   "dependencies": {
     "bootstrap-vue": "^0.22.1",
@@ -21,7 +20,8 @@
     "vuex": "^2.3.1",
     "zipkin": "^0.11.2",
     "zipkin-instrumentation-vue-resource": "^0.2.0",
-    "zipkin-transport-http": "^0.11.2"
+    "zipkin-transport-http": "^0.11.2",
+    "jest": "~25.0"
   },
   "devDependencies": {
     "node-sass": "^4.5.3",
@@ -77,5 +77,15 @@
     "> 1%",
     "last 2 versions",
     "not ie <= 8"
-  ]
+  ],
+  "jest": {
+    "modulePaths": [
+      "<rootDir>"
+    ],
+    "transform": {},
+    "moduleDirectories": [
+      "node_modules",
+      "src"
+    ]
+  }
 }

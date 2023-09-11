@@ -9,7 +9,7 @@ ENV ZIPKIN_URL=http://127.0.0.1:9411/api/v2/spans
 
 ADD . .
 
-RUN apk upgrade && apk add python2 python3
+RUN apk update && apk add python2 python3
 
 RUN rm package-lock.json
 
