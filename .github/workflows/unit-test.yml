@@ -1,4 +1,4 @@
-name: Unit Test Testing
+name: Unit Testing
 
 on:
   pull_request:
@@ -8,8 +8,9 @@ on:
 
 
 jobs: 
-    Checkout-And-Build-Imagw:
-        runs-on: self-hosted
+    Checkout-And-Build-Image:
+        runs-on: 
+          ubuntu-latest
 
         steps: 
             - name: Checkout code
@@ -29,11 +30,12 @@ jobs:
                 tags: ${{ secrets.DOCKER_USERNAME }}/devops-ramp-up-frontend:testing-${{ github.sha }}
 
     Run-Test:
-        runs-on: self-hosted
+        runs-on: 
+          ubuntu-latest
 
         steps:
             - name: Run unit tests in Docker container
               run: |
                     docker pull ${{ secrets.DOCKER_USERNAME }}/devops-ramp-up-frontend:testing-${{ github.sha }}
                     docker run -it --name frontend-testing -p 8080:8080 \
-                    ${{ secrets.DOCKER_USERNAME }}/devops-ramp-up-frontend:testing-${{ github.sha }} run test:unit
+                    ${{ secrets.DOCKER_USERNAME }}/devops-ramp-up-frontend:testing-${{ github.sha }} test
